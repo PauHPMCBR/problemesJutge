@@ -1,9 +1,15 @@
 #include <bits/stdc++.h>
-using namespace std;
+using std::endl;
+using std::cin;
+using std::cout;
+using std::make_pair;
+using std::vector;
+using std::pair;
+using std::queue;
 
 vector < vector <char> > v;
 vector < vector <int> > dist;
-int n, m;
+int n, m, distance, secondDistance;
 
 
 /*int dfs(int x, int y) {
@@ -27,8 +33,7 @@ bool isValid(int x, int y, int d) {
     return true;
 }
 
-int bfs (int x, int y) {
-    int counter = 0;
+void bfs (int x, int y) {
     queue <pair <int, int> > Q;
     Q.push(make_pair(x, y));
     while(!Q.empty()) {
@@ -37,18 +42,23 @@ int bfs (int x, int y) {
         x = prov.first;
         y = prov.second;
         int d = dist[x][y];
-        if (v[x][y] == 't') ++counter;
+        if (v[x][y] == 't') if (dist[x][y] >= distance) {
+            secondDistance = distance;
+            distance = dist[x][y];
+        }
         if (isValid(x-1, y, d+1)) Q.push(make_pair(x-1, y));
         if (isValid(x, y-1, d+1)) Q.push(make_pair(x, y-1));
         if (isValid(x+1, y, d+1)) Q.push(make_pair(x+1, y));
         if (isValid(x, y+1, d+1)) Q.push(make_pair(x, y+1));
     }
-    return counter;
+    return;
 }
 
 
 
 int main() {
+    distance = -1;
+    secondDistance = -1;
     int x, y;
     cin >> n >> m;
     v = vector < vector <char> >(n);
@@ -61,6 +71,7 @@ int main() {
     cin >> x >> y;
     
     dist[x-1][y-1] = 0;
-    int res = bfs(x-1, y-1);
-    cout << res << endl;
+    bfs(x-1, y-1);
+    if (secondDistance == -1) cout << "no es pot arribar a dos o mes tresors" << endl;
+    else cout << "segona distancia maxima: " << secondDistance << endl;
 }
