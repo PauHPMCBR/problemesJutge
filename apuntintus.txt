@@ -1,0 +1,18 @@
+swap(a, b);
+for(auto it : v)
+
+s.substr(startPos, len) //get subsring
+
+ios_base::sync_with_stdio(false); //optimitzar i/o
+
+
+segmented sieve for intervals to find primes
+linked list
+binary search tree
+
+
+
+S(a)=d(n*(n-1)/2)
+
+S(g)=a((1-r^n)/(1-r))
+S(inf) = a/(1-r)
