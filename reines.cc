@@ -2,35 +2,46 @@
 using namespace std;
 
 int n;
-vector <bool> fil;
-vector <bool> col;
+vector <int> col;	
 vector <bool> dig1;
 vector <bool> dig2;
+bool lel = false;
 
-int backtrack(int p) {
-	if(p == n) return 1;
-	int count = 0;
+void escriu() {
 	for (int i = 0; i < n; ++i) {
-		if (col[i]) continue;
+		for (int j = 0; j < n; ++j) {
+			if (col[j] == i) cout << 'Q';
+			else cout << '.';
+		}
+		cout << endl;
+	}
+	//cout << endl;
+	lel = true;
+}
+
+void backtrack(int p) {
+	if (lel) return;
+	if(p == n) return escriu();
+	for (int i = 0; i < n; ++i) {
+		if (col[i] >= 0) continue;
 		if (dig1[n-1+i-p]) continue;
 		if (dig2[2*n-2-i-p]) continue;
-		col[i] = true;
+		col[i] = p;
 		dig1[n-1+i-p] = true;
 		dig2[2*n-2-i-p] = true;
-		count += backtrack(p+1);
-		col[i] = false;
+		backtrack(p+1);
+		col[i] = -1;
 		dig1[n-1+i-p] = false;
 		dig2[2*n-2-i-p] = false;
 	}
-	return count;
 }
 
 
 int main(){
 	cin >> n;
-	fil = vector <bool>(n, false);
-	col = vector <bool>(n, false);
+	col = vector <int>(n, -1);
 	dig1 = vector <bool>(n, false);
 	dig2 = vector <bool>(n, false);
-	cout << backtrack(0) << endl;
+	backtrack(0);
+	if (!lel) cout << "NO SOLUTION" << endl;
 }
