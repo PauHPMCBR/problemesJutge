@@ -16,3 +16,6 @@ S(a)=d(n*(n-1)/2)
 
 S(g)=a((1-r^n)/(1-r))
 S(inf) = a/(1-r)
+
+#pragma GCC optimize ("O3")
+#pragma GCC target ("sse4")
