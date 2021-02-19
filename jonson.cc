@@ -4,32 +4,33 @@ typedef long long ll;
 
 vector<vector<ll>>cost;
 vector<vector<ll>>adj;
-main() {
-   ll vert, edge, i, j, k, c;
-   cout << "Enter no of vertices: ";
-   cin >> vert;
-   cout << "Enter no of edges: ";
-   cin >> edge;
-   cout << "Enter the EDGE Costs:\n";
-   for (k = 1; k <= edge; k++) { //take the input and store it into adj and cost matrix
-      cin >> i >> j >> c;
-      adj[i][j] = cost[i][j] = c;
+int main() {
+   ll n, i, j, k, c, t;
+   cin >> t;
+   while (t--) {
+   cin >> n;
+   cost = vector<vector<ll>>(n, vector<ll>(n, 2*1e10));
+   adj = vector<vector<ll>>(n, vector<ll>(n, 2*1e10));
+   for (i = 0; i < n; i++) {
+      cin >> c;
+      adj[i][(i+1)%n] = cost[i][(i+1)%n] = min(adj[i][(i+1)%n], c);
+      adj[(i+1)%n][i] = cost[(i+1)%n][i] = min(adj[(i+1)%n][i], c);
    }
-   for (i = 1; i <= vert; i++)
-      for (j = 1; j <= vert; j++) {
-         if (adj[i][j] == 0 && i != j)
-            adj[i][j] = LLONG_MAX; //if there is no edge, put LLONG_MAXinity
+   for (i = 0; i < n; i++) adj[i][i] = 0;
+   for (k = 0; k < n; k++)
+      for (i = 0; i < n; i++)
+         for (j = 0; j < n; j++)
+            adj[i][j] = min(adj[i][j], adj[i][k] + adj[k][j]);
+   int res = 0;
+   for (i = 0; i < n; i++) {
+      for (j = 0; j < n; j++) {
+            cout << adj[i][j] << " ";
+            res += adj[i][j];
+
       }
-   for (k = 1; k <= vert; k++)
-      for (i = 1; i <= vert; i++)
-         for (j = 1; j <= vert; j++)
-            adj[i][j] = min(adj[i][j], adj[i][k] + adj[k][j]); //find minimum path from i to j through k
-   cout << "Resultant adj matrix\n";
-   for (i = 1; i <= vert; i++) {
-      for (j = 1; j <= vert; j++) {
-            if (adj[i][j] != LLONG_MAX)
-               cout << adj[i][j] << " ";
-      }
-      cout << "\n";
+      cout << endl;
    }
+         cout << res << endl;
+
+}
 }
