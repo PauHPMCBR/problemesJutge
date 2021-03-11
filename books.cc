@@ -10,7 +10,9 @@ int b(int pos, int money) {
 	if (money == 0) return 0;
 	if (pos < 0) return 0;
 	if (s[pos][money] != -1) return s[pos][money];
-	return s[pos][money] = max(b(pos-1, money-v[pos])+p[pos], b(pos-1, money));
+	if (money-v[pos] < 0) return s[pos][money] = b(pos-1, money);
+	int a = b(pos-1, money-v[pos]);
+	return s[pos][money] = max(a+p[pos], b(pos-1, money));
 }
 
 int main(){
@@ -29,5 +31,16 @@ int main(){
 	else {
 		s = vector<vector<int>>(n, vector<int>(sum+1, -1));
 	}
+	int money=x;
+	int pags = 0;
+	int maxPags = 0;
+	for(int i = n-1; i >= 0; ++i) {
+
+		if (pags > maxPags) maxPags = pags;
+		pags = 0;
+	}
+
+
+
 	cout << b(n-1,x) << endl;
 }
