@@ -6,6 +6,7 @@ for(auto it : v)
 s.substr(startPos, len) //get subsring
 
 ios_base::sync_with_stdio(false); //optimitzar i/o
+cin.tie(NULL);
 
 
 segmented sieve for intervals to find primes
