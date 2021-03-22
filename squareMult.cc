@@ -37,11 +37,11 @@ bool sol(int x, int y, bool f) {
 	if (x == y) {
 		v[x][y] = 1;
 		if (f) {
-				if (sol(x, y+1, f)) return true;
-			}
-			else {
-				if (sol(x+1, y, f)) return true;
-			}
+			if (sol(x, y+1, f)) return true;
+		}
+		else {
+			if (sol(x+1, y, f)) return true;
+		}
 	}
 	for (int i = 1; i <= n*n; ++i) {
 		if (primes.count(i)) continue;
