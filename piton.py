@@ -1,0 +1,1 @@
+for i in range(int(input())): print("SI" if sorted(input()) == sorted("hola") else "NO")
