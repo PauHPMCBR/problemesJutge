@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+<<<<<<< HEAD
 int n,m;
 unordered_map<int,int>graph;
 
@@ -26,4 +27,9 @@ int main(){
 		}
 		cout << pos << endl;
 	}
+=======
+
+int main(){
+	
+>>>>>>> d5dc4b0e9abf2c7c69f326aeee2e037c6de0735c
 }
