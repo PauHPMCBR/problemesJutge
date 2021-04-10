@@ -1,0 +1,65 @@
+__gcd(a,b);
+
+swap(a, b);
+for(auto it : v)
+
+s.substr(startPos, len) //get subsring
+
+ios_base::sync_with_stdio(false); //optimitzar i/o
+cin.tie(NULL);
+
+
+segmented sieve for intervals to find primes
+linked list
+binary search tree
+
+
+
+S(a)=d(n*(n-1)/2)
+
+S(g)=a((1-r^n)/(1-r))
+S(inf) = a/(1-r)
+
+#pragma GCC optimize ("O3")
+#pragma GCC target ("sse4")
+
+__int128_t
+
+auto r = equal_range(array, array+n, x); (pair de pointers indicant on comença i acaba un valor en una estructura ordenada)
+
+s.erase(s.find(x)); (treu nomes 1 x d'un multiset en comptes de tots)
+
+auto it = s.find(x);
+if (it == s.end()) {
+// x is not found
+}
+
+bitset<10> a(string("0010110110"));
+bitset<10> b(string("1011011000"));
+cout << (a&b) << "\n"; // 0010010000
+cout << (a|b) << "\n"; // 1011111110
+cout << (a^b) << "\n"; // 1001101110
+
+
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+
+indexed set
+
+
+sum (x-a) to min: a = median of xs
+sum (x-a)^2 to min: a = average of xs
+string compression: huffman coding
+
+dfs
+bfs
+bellman-ford: min dist from one node to all others -> can find negative cycle repeating n times and checking if it was updated
+SPFA algorithm: optimized bellman-ford:
+	if a->b reduces a distance, add b to the queue.
+dikjstra
+floyd-warshall: min dist from all nodes to all nodes
+
+tree: n nodes and n-1 edges
+	doesn't need a "visited" bool vector, just store the previous node to not go back, and can implement dfs
+
+
