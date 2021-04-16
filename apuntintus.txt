@@ -62,4 +62,5 @@ floyd-warshall: min dist from all nodes to all nodes
 tree: n nodes and n-1 edges
 	doesn't need a "visited" bool vector, just store the previous node to not go back, and can implement dfs
 
+for (auto [p1, p2] : v)
 

@@ -3,26 +3,26 @@ using namespace std;
 int n, m;
 vector<vector<int>>v;
 vector<int>visited;
-vector<int>ans;
+vector<int>parent;
+vector<int>cycle;
 
-bool dfs(int x, int pre) {
+void dfs(int x) {
+	visited[x] = 1;
 	for (auto i : v[x]) {
-		if (visited[i] == 1) {
-			if (i != pre) {
-				ans.push_back(x);
-				return true;
-			}
+		if (!visited[i]) {
+			parent[i] = x;
+			dfs(i);
 		}
-		else if (!visited[i]) {
-			visited[i] = 1;
-			if (dfs(i, x)) {
-				ans.push_back(x);
-				return true;
+		else if (visited[i] == 1 && cycle.size() == 0) {
+			int current = x;
+			while (current != i) {
+				cycle.push_back(current);
+				current = parent[current];
 			}
-			visited[i] = 2;
+			cycle.push_back(i);
 		}
 	}
-	return false;
+	visited[x] = 2;
 }
 
 int main(){
@@ -34,26 +34,24 @@ int main(){
 	while (t--) {
 		cin >> n >> m;
 		v = vector<vector<int>>(n);
+		parent = vector<int>(n, 0);
 		visited = vector<int>(n, 0);
-		ans.clear();
+		cycle.clear();
 		int a,b;
 		while (m--) {
 			cin >> a >> b;
 			v[a-1].push_back(b-1);
 		}
-		bool gotSol = false;
 		for (int i = 0; i < n; ++i) {
 			if (!visited[i]) {
-				if (dfs(i, i)) {
-					cout << "NO" << "\n";
-					cout << ans.size()-1 << "\n";
-					for (int i = ans.size()-1; i >= 0; --i) cout << ans[i]+1 << ' ';
-					cout << "\n";
-					gotSol = true;
-					break;
-				}
+				dfs(i);
 			}
 		}
-		if (!gotSol) cout << "YES" << "\n";
+		if (cycle.size() == 0) cout << "YES" << "\n";
+		else {
+			cout << "NO" << "\n" << cycle.size() << "\n";
+			for (int i = cycle.size()-1; i >= 0; --i) cout << cycle[i]+1 << ' ';
+			cout << cycle[cycle.size()-1]+1 << "\n";
+		}
 	}
 }
