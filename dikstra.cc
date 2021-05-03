@@ -30,7 +30,9 @@ void dijkstra(ll x){
 }
 
  int main(){
-    
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
     cin>>n>>m;
     g=vector<vector<pair<ll,ll>>>(n);
     v=vector<bool>(n);
@@ -39,6 +41,7 @@ void dijkstra(ll x){
         ll a,b,c;
         cin>>a>>b>>c;
         g[a-1].push_back({c, b-1});
+        g[b-1].push_back({c, a-1});
     }
     dijkstra(0);
     for (ll i = 0; i < n; ++i) {
