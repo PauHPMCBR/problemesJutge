@@ -1,66 +1,75 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
 ll n,m;
 vector<vector<pair<ll,ll>>>v;
-vector<ll>parent;
-vector<bool>visited;
-vector<ll>dist;
-ll ans;
-void dikjstra(ll ex1, ll ex2) {
+vector<vector<pair<ll,ll>>>v2;
+vector<ll>d;
+vector<ll>d2;
+
+void dijkstra1(ll x){
+	d[x]=0;
 	priority_queue<pair<ll,ll>>pq;
-    pq.push({0,0});
-    dist[0]=0;
-    while(!pq.empty()){
-        ll actual=pq.top().second;
-        pq.pop();
-        if(visited[actual]) continue;
-        visited[actual]=true;
-        if (actual == n-1) {ans = dist[actual]; return;}
-        for(auto adj:v[actual]){
-        	ll node = adj.first;
-        	ll pes = adj.second;
-        	if ((ex1 == node && ex2 == actual) || (ex2 == node && ex1 == actual)) continue;
-        	if (dist[node] > dist[actual]+pes) {
-        		dist[node] = dist[actual]+pes;
-            	pq.push({-dist[node], node});
-            	if (ex1 == -1) parent[node] = actual;
-        	}
-            
-        }
-    }
+	pq.push({0,x});
+	while (!pq.empty()){
+		ll node=pq.top().second;
+		ll pes=-pq.top().first;
+		pq.pop();
+		if (pes > d[node]) continue;
+		for (auto i : v[node]){
+			if (i.second+pes < d[i.first]){
+				d[i.first] = i.second + pes;
+				pq.push({-d[i.first], i.first});
+			}
+		}
+	}
+}
+
+void dijkstra2(ll x) {
+	d2[x] = 0;
+	priority_queue<pair<ll,ll>>pq;
+	pq.push({0,x});
+	while (!pq.empty()){
+		ll node=pq.top().second;
+		ll pes=-pq.top().first;
+		pq.pop();
+		if (pes > d2[node]) continue;
+		for (auto adj : v2[node]){
+			if (adj.second + pes < d2[adj.first]){
+				d2[adj.first] = adj.second + pes;
+				pq.push({-d2[adj.first], adj.first});
+			}
+		}
+	}
 }
 
 int main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
 	cin >> n >> m;
 	v = vector<vector<pair<ll,ll>>>(n);
-	visited = vector<bool>(n, false);
-	parent = vector<ll>(n, -1);
-	dist = vector<ll>(n, 1e15);
+	v2= vector<vector<pair<ll,ll>>>(n);
+	d = vector<ll>(n, 1e17);
 	while (m--) {
-		ll a,b,c;
-		cin >> a >> b >> c;
-		v[a-1].push_back({b-1,c});
-		v[b-1].push_back({a-1,c});
+		ll a,b,w;
+		cin >> a >> b >> w;
+		v[a-1].push_back({b-1, w});
+		v2[b-1].push_back({a-1, w});
 	}
-	dikjstra(-1, -1);
-	ll shortestPath = ans;
-	ll node = n-1;
-	ll sol = -1;
-	while (parent[node] != -1) {
-		ans = -1;
-		visited = vector<bool>(n, false);
-		dist = vector<ll>(n, 1e15);
-		dikjstra(node, parent[node]);
-		if (ans != -1 && ans != shortestPath) {
-			if (sol == -1) sol = ans;
-			else sol = min(sol, ans);
+	dijkstra1(0);
+	d2 = vector<ll>(n, 1e17);
+	dijkstra2(n-1);
+	ll sol = 1e17;
+	for (ll i = 0; i < n; ++i) {
+		for (auto adj:v[i]){
+			if (d[i] != 1e17 && d2[adj.first] != 1e17){
+				ll yeet= d[i]+adj.second + d2[adj.first];
+				if (yeet > d[n-1] && abs(yeet-d[n-1]) < abs(sol-d[n-1])) {
+					sol=yeet;
+				}
+			}		
 		}
-		node = parent[node];
 	}
-	cout << sol << endl;
+
+	if (sol == 1e17) cout << -1 << endl;
+	else cout << sol << endl;
+
 }

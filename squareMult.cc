@@ -15,6 +15,7 @@ bool isPrime(int x) {
 	if (x == 2) return true;
 	if (x%2 == 0) return false;
 	for (int i = 3; i*i <= x; i+=2) if (x%i == 0) return false;
+	return true;
 }
 
 void getPrimes(int x) {
@@ -26,17 +27,17 @@ void getPrimes(int x) {
 
 bool check(int x) {
 	return a[x] == b[x];
-}
+}x
 
 int maxim = 1;
-int lemao = -1;
+int provMul = -1;
 bool sol(int x, int y, bool f) {
 	if (x*n+y > maxim) {
 		maxim = x*n+y;
 		cout << maxim << endl;
 	}
 	if (x == n && y == n) return true;
-	if (y == n) {lemao = a[x]; return sol(x+1, x, !f);}
+	if (y == n) {provMul = a[x]; return sol(x+1, x, !f);}
 	if (x == n) {
 		if (!check(y)) return false;
 		return sol(y+1, y+1, !f);
@@ -52,9 +53,9 @@ bool sol(int x, int y, bool f) {
 	}
 	for (int i = 1; i <= n*n; ++i) {
 		if (primes.count(i)) continue;
-		if (!f) if (lemao%i != 0) continue;
+		if (!f) if (provMul%i != 0) continue;
 		if (!s.count(i)) {
-			if (!f) lemao /= i;
+			if (!f) provMul /= i;
 			s.insert(i);
 			v[x][y] = i;
 			a[x] *= i;
@@ -69,7 +70,7 @@ bool sol(int x, int y, bool f) {
 			a[x] /= i;
 			b[y] /= i;
 			s.erase(i);
-			if (!f) lemao *= i;
+			if (!f) provMul *= i;
 		}
 	}
 	return false;

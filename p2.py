@@ -1,5 +1,30 @@
 lel = int(input())
-if lel == 0:
-	print("ez")
+if lel == -64:
+	print("Q=nSv(m)^te")
+	print("I=^Q/^t")
+	print("V=^E/Q")
+	print("1e=1.6*10^-19C")
+	print("1eV = 1.6*10^-19J")
+	print("R=pl/S")
+	print("p(T)=p(293)*(1+a(T-293))")
+	print("P=I^V (variants)")
+	print("fem=W/^Q (V)")
+elif lel == -65:
+	print("SERIE:")
+	print("R=sum(R)")
+	print("V=sum(V)")
+	print("I=I")
+	print("PARALLEL:")
+	print("1/R=sum(1/R)")
+	print("V=V")
+	print("I=sum(I)")
+elif lel == -66:
+	print("C=Q/^V (farats)")
+	print("C=e(perm.El)*A/dist")
+	print("e(buit)=8.85*10^-12 C/N/m^2")
+	print("E=1/2*Q*difV")
+	print("Q=Q(0)(1-e^(-t/tau))")
+	print("Q(0)=fem*C")
+	print("tau=R*C")
 else:
 	print(lel**2)

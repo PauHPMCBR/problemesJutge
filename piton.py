@@ -1,1 +1,3 @@
-for i in range(int(input())): print("SI" if sorted(input()) == sorted("hola") else "NO")
+s = "barnat"
+s = "B"+s[1:4]+"o"+s[-1]
+print(s)

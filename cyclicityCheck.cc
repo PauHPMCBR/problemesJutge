@@ -14,7 +14,7 @@ void dfs(int x) {
 			dfs(i);
 		}
 		else if (visited[i] == 1 && cycle.size() == 0) {
-			int current = x;
+			int current = x; //parent?
 			while (current != i) {
 				cycle.push_back(current);
 				current = parent[current];
