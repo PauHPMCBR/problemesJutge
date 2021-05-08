@@ -9,8 +9,8 @@ int getParent(int x){
 }
 
 void join(int x, int y) {
-    x = getParent(x);
-    y = getParent(y);
+    x = getParen(tx);
+    y = getParen(ty);
     if (x != y) parent[x] = y;
 }
 
