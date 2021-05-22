@@ -14,5 +14,5 @@ int main(){
 	int maxim = 0;
 	int i = 0, j = n-1;
 	set<int>used;
-	
+	while
 }

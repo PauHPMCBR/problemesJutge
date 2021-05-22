@@ -15,14 +15,14 @@ def lol(x1, y1, x2, y2, orientacio, it):
     y3 = y1
     #if orientacio == 1:
 
-    dib.polygon([(x1, y1), (x1, y2-1), (x2-1, y2-1),(x2-1, y1)], 255, 255 it*30)
+    dib.polygon([(x1, y1), (x1, y2-1), (x2-1, y2-1),(x2-1, y1)], (255, 255, it*30))
         
 
-#f = input()
-f = "Black"
-#r = int(input())
-#g = int(input())
-#b = int(input())
+f = input()
+#f = "Black"
+r = int(input())
+g = int(input())
+b = int(input())
 it = int(input())
 fib = [0]*it
 for i in range(it):
@@ -39,7 +39,7 @@ dib = ImageDraw.Draw(img)
 n = fib[it-2]
 m = fib[it-2]
 for i in range(it):
-    lol(0,0,n,m,1)
+    lol(0,0,n,m,1,i)
     
 
 for i in fib:

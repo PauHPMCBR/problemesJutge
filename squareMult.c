@@ -21,6 +21,11 @@ void getPrimes(int x) {
 	}
 }
 
+
+bool check(int x) {
+	return a[x] == b[x];
+}
+
 int maxim = 0;
 int provMul = -1;
 int sols = 0;
@@ -35,7 +40,7 @@ void sol(int x, int y, bool f) {
 	}
 	if (y == n) {provMul = a[x]; return sol(x+1, x, !f);}
 	if (x == n) {
-		if (a[y] != b[y]) return;
+		if (!check(y)) return;
 		return sol(y+1, y+1, !f);
 	}
 	if (x == y) {
@@ -47,37 +52,26 @@ void sol(int x, int y, bool f) {
 			return sol(x+1, y, f);
 		}
 	}
-	if (f) {
-		for (int i = 1; i <= n*n; ++i) {
-			if (primes.count(i)) continue;
-			if (!s.count(i)) {
-				s.insert(i);
-				v[x][y] = i;
-				a[x] *= i;
-				b[y] *= i;
+	for (int i = 1; i <= n*n; ++i) {
+		if (primes.count(i)) continue;
+		if (!f) if (provMul%i != 0) continue;
+		if (!s.count(i)) {
+			if (!f) provMul /= i;
+			s.insert(i);
+			v[x][y] = i;
+			a[x] *= i;
+			b[y] *= i;
+			if (f) {
 				sol(x, y+1, f);
-				a[x] /= i;
-				b[y] /= i;
-				s.erase(i);
 			}
-		}
-	}
-	else {
-		for (int i = 1; i <= n*n; ++i) {
-			if (primes.count(i)) continue;
-			if (provMul%i != 0) continue;
-			if (!s.count(i)) {
-				provMul /= i;
-				s.insert(i);
-				v[x][y] = i;
-				a[x] *= i;
-				b[y] *= i;
+			else {
 				sol(x+1, y, f);
-				a[x] /= i;
-				b[y] /= i;
-				s.erase(i);
-				provMul *= i;
 			}
+			v[x][y] = -1;
+			a[x] /= i;
+			b[y] /= i;
+			s.erase(i);
+			if (!f) provMul *= i;
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using namespace std;
 
 int main(){
-	int n = 12;
-	cout << n << endl;
+	int n;
+	cin >> n;
+	cout << 2 << endl;
 }
