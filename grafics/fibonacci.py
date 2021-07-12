@@ -1,31 +1,14 @@
 from PIL import Image, ImageDraw
 
-#def triangle(x, y, mida, orientacio, r, g, b):
-#    if mida == 1:
-#        dib.point([x, y], r, g, b)
-#        return
-#    v = [[x,y],[x+mida,y],[x+mida,y+mida],[x,y+mida]]
-#    a = v[orientacio]
-#    b = v[orientacio-1]
-#    c = v[orientacio-2]
-#    dib.polygon([a[0], a[1], b[0], b[1], c[0], c[1]], r, g, b)
 
-def lol(x1, y1, x2, y2, orientacio, it):
-    x3 = x2
-    y3 = y1
-    #if orientacio == 1:
-
-    dib.polygon([(x1, y1), (x1, y2-1), (x2-1, y2-1),(x2-1, y1)], (255, 255, it*30))
-        
 
 f = input()
-#f = "Black"
 r = int(input())
 g = int(input())
 b = int(input())
-it = int(input())
-fib = [0]*it
-for i in range(it):
+k = int(input())
+fib = [0]*(k+1)
+for i in range(k+1):
     if i < 2:
         fib[i] = 1
     else:
@@ -34,16 +17,30 @@ for i in range(it):
 img = Image.new('RGB', [fib[i], fib[i-1]], f)
 dib = ImageDraw.Draw(img)
 
+fib.reverse()
+x1 = 0
+y1 = 0
+x2 = fib[0]-1
+y2 = fib[1]-1
+fib.pop(0)
+
+for i in range(k):
+    if i%4 == 0:
+        coords = [(x1+fib[i]-1,y1), (x1+fib[i]-1,y1+fib[i]-1), (x1,y1+fib[i]-1)]
+        x1 += fib[i]
+    elif i%4 == 1:
+        coords = [(x1,y1), (x1+fib[i]-1,y1+fib[i]-1), (x1,y1+fib[i]-1)]
+        y1 += fib[i]
+    elif i%4 == 2:
+        coords = [(x2-fib[i]+1,y1), (x2,y1), (x2-fib[i]+1,y1+fib[i]-1)]
+        x2 -= fib[i]
+    else:
+        coords = [(x1,y2-fib[i]+1), (x1+fib[i]-1,y2-fib[i]+1), (x1+fib[i]-1,y2)]
+        y2 -= fib[i]
+    if i+2 >= k:
+        dib.point((coords[0]), ((k-i)*r, (k-i)*g, (k-i)*b))
+    else:
+        dib.polygon(coords, ((k-i)*r, (k-i)*g, (k-i)*b))
 
 
-n = fib[it-2]
-m = fib[it-2]
-for i in range(it):
-    lol(0,0,n,m,1,i)
-    
-
-for i in fib:
-    print(i)
-
-img.show()
 img.save('output.png')

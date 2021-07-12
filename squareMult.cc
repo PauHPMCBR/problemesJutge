@@ -21,7 +21,7 @@ void getPrimes(int x) {
 	}
 }
 
-int maxim = 0;
+int maxim = -10;
 int provMul = -1;
 int sols = 0;
 void sol(int x, int y, bool f) {

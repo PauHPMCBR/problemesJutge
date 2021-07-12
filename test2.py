@@ -4,20 +4,20 @@ import time
 
 def printChar(x):
 	keyboard.write(x)
-	time.sleep(rng(1,5)/100)
+	time.sleep(rng(1,6)/100)
 
 time.sleep(1)
 
-s = """Les Canàries és un arxipèlag de l'Atlàntic que conforma una de les disset
-comunitats autònomes d'Espanya i una de les regions ultraperifèriques de la
-Unió Europea. Està format per set illes principals: El Hierro, La Gomera,
-La Palma i Tenerife, que formen la província de Santa Cruz de Tenerife, i
-Fuerteventura, Gran Canària i Lanzarote, que componen la província de Las
-Palmas. També formen part de Canàries els territoris insulars de
-l'arxipèlag Chinijo. Les illes són d'origen volcànic i el seu clima és
-subtropical. Les Canàries tenen quatre parcs nacionals i és un important
-destí turístic per la seva gran bellesa natural, les seves platges i un
-clima privilegiat"""
+s = """La Sagrada Família és una gran basílica catòlica de Barcelona, dissenyada
+per l'arquitecte català Antoni Gaudí. Iniciada el 1882, encara està en
+construcció. És l'obra mestra de Gaudí, i el màxim exponent de
+l'arquitectura modernista catalana. El 1926 va morir Gaudí i només s'havia
+construït una torre. Del projecte de l'edifici només es conservaven plànols
+i un model en guix que va ser molt malmès durant la Guerra Civil espanyola.
+Des de llavors han prosseguit les obres. La Sagrada Família va ser
+declarada Patrimoni de la Humanitat per la UNESCO l'any 2005. El
+Temple va ser consagrat i declarat Basílica menor el 7 de novembre del 2010
+pel papa Benet XVI."""
 
 for i in s:
 	printChar(i)
