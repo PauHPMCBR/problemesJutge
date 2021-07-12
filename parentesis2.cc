@@ -2,20 +2,15 @@
 using namespace std;
 
 vector<char>v;
-int toInt(char c) {return int(c-'0');}
-bool isInt(char c) {return (c <= '9' && c >= '0') ? true : false;}
 
 int res(int a, int b) {
-	/*cout << "current vector: ";
-	for (int i = a; i < b; ++i) cout << v[i];
-		cout << endl;*/
 	if (a == b-1) {
-		return toInt(v[a]);
+		return int(v[a]-'0');
 	}
-	if (isInt(v[a])) {
-		if (v[a+1] == '+') return toInt(v[a])+res(a+2, b);
-		else if (v[a+1] == '-') return toInt(v[a])-res(a+2, b);
-		else return toInt(v[a])*res(a+2, b);
+	if (v[a] <= '9' && v[a] >= '0') {
+		if (v[a+1] == '+') return int(v[a]-'0')+res(a+2, b);
+		else if (v[a+1] == '-') return int(v[a]-'0')-res(a+2, b);
+		else return int(v[a]-'0')*res(a+2, b);
 	}
 	int parentesis = 1;
 	for (int i = a+1; i < b; ++i) {
@@ -32,11 +27,12 @@ int res(int a, int b) {
 }
 
 int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 	char prov;
 	while(cin >> prov) {
 		v.push_back(prov);
 	}
-	//cout << lastNum << ' ' << v.size() << endl;
-	//cout << "lel" << endl;
 	cout << res(0, v.size()) << endl;
 }

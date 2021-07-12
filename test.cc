@@ -2,6 +2,5 @@
 using namespace std;
 
 int main(){
-	int n = 12;
-	cout << n << endl;
+	cout << "Bon dia a tothom!" << endl;
 }
