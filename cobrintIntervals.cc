@@ -13,7 +13,7 @@ int main(){
 			current = v[0];
 			int m = 1;
 			for (int i = 1; i < n; ++i) {
-				if (v[i]-1 <= current) continue;
+				if (v[i] <= current+1) continue;
 				else {current = v[i]; ++m;}
 			}
 			cout << m << endl;

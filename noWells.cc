@@ -2,7 +2,10 @@
 using namespace std;
 int n;
 
-void b(int pos, vector<int>&v, set<int>&s) {
+vector<int>v;
+vector<bool>s;
+
+void b(int pos) {
 	if (pos == n) {
 		cout << '(' << v[0];
 		for (int i = 1; i < n; ++i) {
@@ -13,11 +16,11 @@ void b(int pos, vector<int>&v, set<int>&s) {
 	}
 	if (pos < 2) {
 		for (int i = 1; i <= n; ++i) {
-			if (s.count(i)) continue;
-			s.insert(i);
+			if (s[i]) continue;
+			s[i] = true;
 			v[pos] = i;
-			b(pos+1, v, s);
-			s.erase(i);
+			b(pos+1);
+			s[i] = false;
 		}
 		return;
 	}
@@ -26,19 +29,19 @@ void b(int pos, vector<int>&v, set<int>&s) {
 	int minim = max((v[pos-1]+1)/2, 1);
 	if (pos == n-1) minim = 1;
 	for (int i = minim; i <= maxim; ++i) {
-		if (s.count(i)) continue;
-		s.insert(i);
+		if (s[i]) continue;
+		s[i] = true;
 		v[pos] = i;
-		b(pos+1, v, s);
-		s.erase(i);
+		b(pos+1);
+		s[i] = false;
 	}
 }
 
 int main(){
 	while (cin >> n){
-		set<int>s;
-		vector<int>v(n);
-		b(0, v, s);
+		s = vector<bool>(n, false);
+		v = vector<int>(n);
+		b(0);
 		cout << "----------" << endl;
 	}
 }

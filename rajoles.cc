@@ -1,45 +1,54 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
 int main(){
-  int n;
-  while (cin >> n) {
-    vector <char> v(n);
-    int greenDiff = 0;
-    int whiteDiff = 0;
-    int greenLowestDiff = 0;
-    int whiteLowestDiff = 0;
-    int greenPos = 0;
-    int whitePos = 0;
-    for (int i = 0; i < n; ++i) {
-      cin >> v[i];
-      if (v[i] == 'V') {
-        --greenDiff;
-        ++whiteDiff;
-        if (greenLowestDiff > greenDiff) {
-          greenLowestDiff = greenDiff;
-          greenPos = i;
-        }
-      }
-      else {
-        ++greenDiff;
-        --whiteDiff;
-        if (whiteLowestDiff > whiteDiff) {
-          whiteLowestDiff = whiteDiff;
-          whitePos = i;
-        }
-      }
-    }
-    char startColor = 'V';
-    int partition = greenPos;
-    if (whiteLowestDiff < greenLowestDiff) {
-      startColor = 'B';
-      partition = whitePos;
-    }
-    int count = 0;
-    for (int i = 0; i <= partition; ++i) if (v[i] != startColor) ++count;
-    if (partition < n-1) for (int i = partition+1; i < n; ++i) if (v[i] == startColor) ++count;
-    cout << count << endl;
-  }
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	ll n;
+	while (cin >> n) {
+		string s;
+		cin >> s;
+
+		if (s.size() < 3) {
+			cout << 0 << endl;
+			continue;
+		}
+
+		vector<ll>b(n);
+		vector<ll>v(n);
+		b[0] = (s[0] != 'B');
+		for (ll i = 1; i < n; ++i) {
+			b[i] = b[i-1] + (s[i] == 'V');
+		}
+
+		v[n-1] = (s[n-1] != 'V');
+		ll minCost1 = min(b[n-1], b[n-2]+v[n-1]);
+
+		for (ll i = n-2; i >= 0; --i) {
+			v[i] = v[i+1] + (s[i] == 'B');
+			if (v[i+1]+b[i] < minCost1) minCost1 = v[i+1]+b[i];
+		}
+        if (v[0] < minCost1) minCost1 = v[0];
+
+
+
+		b[n-1] = (s[n-1] != 'B');
+		for (ll i = n-2; i >= 0; --i) {
+			b[i] = b[i+1] + (s[i] == 'V');
+		}
+
+		v[0] = (s[0] != 'V');
+		ll minCost2 = min(b[0], b[1]+v[0]);
+
+		for (ll i = 1; i < n; ++i) {
+			v[i] = v[i-1] + (s[i] == 'B');
+			if (v[i-1]+b[i] < minCost2) minCost2 = v[i-1]+b[i];
+		}
+        if (v[n-1] < minCost2) minCost2 = v[n-1];
+
+
+		cout << min(minCost1, minCost2) << endl;
+	}
 }

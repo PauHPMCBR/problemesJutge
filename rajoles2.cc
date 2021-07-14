@@ -24,12 +24,13 @@ int main(){
 		}
 
 		v[n-1] = (s[n-1] == 'V') ? 0 : pv;
-		ll minCost1 = b[n-2]+v[n-1];
+		ll minCost1 = min(b[n-1], b[n-2]+v[n-1]);
 
 		for (ll i = n-2; i >= 0; --i) {
 			v[i] = v[i+1] + (s[i] == 'B')*pv;
 			if (v[i+1]+b[i] < minCost1) minCost1 = v[i+1]+b[i];
 		}
+        if (v[0] < minCost1) minCost1 = v[0];
 
 
 
@@ -39,12 +40,13 @@ int main(){
 		}
 
 		v[0] = (s[0] == 'V') ? 0 : pv;
-		ll minCost2 = b[1]+v[0];
+		ll minCost2 = min(b[0], b[1]+v[0]);
 
 		for (ll i = 1; i < n; ++i) {
 			v[i] = v[i-1] + (s[i] == 'B')*pv;
 			if (v[i-1]+b[i] < minCost2) minCost2 = v[i-1]+b[i];
 		}
+        if (v[n-1] < minCost2) minCost2 = v[n-1];
 
 
 		cout << min(minCost1, minCost2) << endl;

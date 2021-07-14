@@ -11,13 +11,14 @@ bool isPrime(int n) {
 
 bool es_primer_perfecte(int n) {
 	if (n < 10) return isPrime(n);
-	if (!isPrime(n)) return false;
-	int res = 0;
+	
+	int res = 0, n2 = n;
 	while (n > 0) {
 		res += n%10;
 		n /= 10;
 	}
-	return es_primer_perfecte(res);
+	if (!es_primer_perfecte(res)) return false;
+    return isPrime(n2);
 }
 
 int main() {

@@ -2,7 +2,8 @@
 using namespace std;
 typedef long long ll;
 
-vector<vector <char>>v;
+vector<vector<char>>v;
+vector<vector<int>>dp;
 ll f, c;
 
 bool isValid(ll x, ll y) {
@@ -12,40 +13,44 @@ bool isValid(ll x, ll y) {
 	return true;
 }
 
-ll pathfind(ll x, ll y, ll bpress) {
-	if (y == c-1) return bpress; //o/
-	//v[x][y] = bpress; DYNAMIC PROGRAminimG
-	ll minim = -1;
-	ll prov;
-	if (isValid(x-1, y+1)) {
-		if (v[x-1][y+1] == 'T') prov = pathfind(x-1, y+1, bpress+4);
-		else prov = pathfind(x-1, y+1, bpress+1);
-		if (minim > prov || minim == -1) minim = prov;
-	}
-	if (isValid(x, y+1)) {
-		if (v[x][y+1] == 'T') prov = pathfind(x, y+1, bpress+3);
-		else prov = pathfind(x, y+1, bpress);
-		if (minim > prov || minim == -1) minim = prov;
-	}
-	if (isValid(x+1, y+1)) {
-		if (v[x+1][y+1] == 'T') prov = pathfind(x+1, y+1, bpress+4);
-		else prov = pathfind(x+1, y+1, bpress+1);
-		if (minim > prov || minim == -1) minim = prov;
-	}
-	return minim;
+ll pathfind(ll x, ll y) {
+	if (x == f-1) {
+        if (v[x][y] == '*') return -1;
+        return 0;
+    }
+    
+    if (dp[x][y] != -1) return dp[x][y];
+    
+	ll minim = -1, prov;
+    for (int i = -1; i <= 1; ++i) {
+        if (isValid(x+1, y+i)) {
+            if (v[x+1][y+i] == 'T') {
+                prov = pathfind(x+1, y+i);
+                if (prov != -1) prov += 3+abs(i);
+            }
+            else {
+                prov = pathfind(x+1, y+i);
+                if (prov != -1) prov += abs(i);
+            }
+            if (prov != -1 && (minim > prov || minim == -1)) minim = prov;
+        }
+    }
+	return dp[x][y] = minim;
 }
 
 int main(){
 	ll x, y;
 	cin >> c >> f;
 	v = vector<vector <char>>(f, vector<char>(c));
+    dp = vector<vector<int>>(f, vector<int>(c, -1));
 	for (ll i = 0; i < f; ++i) {
 		for (ll j = 0; j < c; ++j) {
 			cin >> v[i][j];
 			if (v[i][j] == 'M') {x = i; y = j;}
 		}
 	}
-	ll res = pathfind(x, y, 0);
+	ll res = pathfind(x, y);
 	if (res == -1) cout << "IMPOSSIBLE" << endl;
 	else cout << res << endl;
 }
+
