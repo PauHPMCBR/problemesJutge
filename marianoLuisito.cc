@@ -2,7 +2,7 @@
 using namespace std;
 typedef long long ll;
 
-vector<vector<char>>v;
+vector<string>v;
 vector<vector<int>>dp;
 ll f, c;
 
@@ -18,7 +18,6 @@ ll pathfind(ll x, ll y) {
         if (v[x][y] == '*') return -1;
         return 0;
     }
-    
     if (dp[x][y] != -1) return dp[x][y];
     
 	ll minim = -1, prov;
@@ -38,14 +37,17 @@ ll pathfind(ll x, ll y) {
 	return dp[x][y] = minim;
 }
 
-int main(){
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 	ll x, y;
 	cin >> c >> f;
-	v = vector<vector <char>>(f, vector<char>(c));
+	v = vector<string>(f);
     dp = vector<vector<int>>(f, vector<int>(c, -1));
 	for (ll i = 0; i < f; ++i) {
+        cin >> v[i];
 		for (ll j = 0; j < c; ++j) {
-			cin >> v[i][j];
 			if (v[i][j] == 'M') {x = i; y = j;}
 		}
 	}
