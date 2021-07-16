@@ -1,9 +1,0 @@
-img = img.resize((50*n, 50*n))
-
-cout << setprecision(n) << fixed << x;
-
-#include <bits/stdc++.h>
-
-
-region = img.crop((x, y, x2, y2))
-img.paste(region, (x, y, x2, y2))

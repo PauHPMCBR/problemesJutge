@@ -1,9 +1,15 @@
-gran = 2
-for x in range(10000):
-    primer = 0
-    for i in range(int((x+2)/2)):
-        if ((x+2) % (i+2) == 0):
-            primer = 1
-    if (primer == 0):
-        gran = x
-print(gran)
+o = input('introdueix la operacio (s, r, m, d): ')
+x = int(input('introdueix el primer valor: '))
+y = int(input('introdueix el segon valor: '))
+
+print('La resposta a la operació és: ')
+if (o == 's'):
+    print(x+y)
+elif (o == 'r'):
+    print(x-y)
+elif (o == 'm'):
+    print(x*y)
+elif (o == 'd'):
+    print(x/y)
+else:
+    print('Que krak ka ets, no saps ascriura o ke kruk makinola?!')

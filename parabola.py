@@ -27,6 +27,5 @@ dib = ImageDraw.Draw(img)
 for m in range(e, d+1):
     dib.point((m - e, lol-(v[m]-min)-1), 'Blue')
 
-
 img.save('output.png')
 img.show()
