@@ -1,7 +1,3 @@
-#pragma GCC optimize("-O3")
-#pragma GCC optimize("inline")
-#pragma GCC optimize("omit-frame-pointer")
-#pragma GCC optimize("unroll-loops")
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -22,8 +18,8 @@ ll b(ll pos, ll s) {
 }
 
 int main(){
-	 ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+	ios::sync_with_stdio(0);
+    cin.tie(0);
 	cin >> n >> c;
 	vector<ll>v(n);
 	for (ll i = 0; i < n; ++i) cin >> v[i];

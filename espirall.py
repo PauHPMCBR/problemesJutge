@@ -19,7 +19,6 @@ for x in range(n//2):
             dib.line([(x, x+2), (x, n-x-1)], c)
 
 
-img = img.resize((50*n, 50*n))
+img = img.resize((50*n, 50*n), Image.BOX)
 
 img.save('output.png')
-img.show()
