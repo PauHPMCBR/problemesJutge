@@ -24,4 +24,3 @@ for x in range(n):
 
 
 img.save('output.png')
-img.show()

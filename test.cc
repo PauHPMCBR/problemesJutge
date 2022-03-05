@@ -2,13 +2,14 @@
 using namespace std;
 
 int main(){
-	chrono::steady_clock::time_point cBegin = chrono::steady_clock::now();
-	for (int i = 0; i < 1000000; ++i) {
-		cout << 1 << '\n';
-	}
-	chrono::steady_clock::time_point cEnd = chrono::steady_clock::now();
-	int diff = chrono::duration_cast<chrono::milliseconds>(cEnd-cBegin).count();
-	cout << diff << '\n';
+	int n;
+	cin >> n;
+	vector<int>v(n);
+	for (int i = 0; i < n; ++i) cin >> v[i];
+	int x;
+	cin >> x;
+	for (int i = 0; i < n; ++i) cout << v[i]*x << ' ';
+	cout << endl;
 }
 
 //2700 vs 42

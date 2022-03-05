@@ -20,4 +20,3 @@ for i in range(n):
     start += a*(i+1)
 
 img.save('output.png')
-img.show()

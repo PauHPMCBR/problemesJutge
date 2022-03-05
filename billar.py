@@ -31,4 +31,3 @@ while (0==0):
 dib.ellipse([(50*x, 50*y), (50*(x+1)-1, 50*(y+1)-1)], c)
 
 img.save('output.png')
-img.show()

@@ -6,7 +6,8 @@ sys.setrecursionlimit(10000)
 
 #letters = ['e', 'b', 'a', 'u', 'q', 't', 's']
 #letters = ['s', 'd', 'e', 'v', 'a', 'l', 'g']
-letters = ['g', 'r', 'o', 'a', 'x', 'd', 'n']
+#letters = ['g', 'r', 'o', 'a', 'x', 'd', 'n']
+letters = ['f', 'b', 'o', 'r', 'i', 'a', 't']
 
 intro = (855, 573)
 coords = [

@@ -1,0 +1,1 @@
+print((input()+' ').replace("r ", "rr ").replace("R ", "Rr ")[:-1])
