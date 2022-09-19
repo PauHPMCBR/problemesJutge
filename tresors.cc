@@ -24,15 +24,6 @@ int n, m, distance, secondDistance;
     return res+1;
 }*/
 
-void escriu() {
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            cout << v[i][j];
-        }
-        cout << endl;
-    }
-}
-
 bool isValid(int x, int y, int d) {
     if (x < 0 || x >= n) return false;
     if (y < 0 || y >= m) return false;
@@ -46,7 +37,6 @@ void bfs (int x, int y) {
     queue <pair <int, int> > Q;
     Q.push(make_pair(x, y));
     while(!Q.empty()) {
-        escriu();
         pair <int, int> prov = Q.front();
         Q.pop();
         x = prov.first;

@@ -6,15 +6,15 @@ int main() {
 	string prov;
 	while (cin >> prov) {
 		for (int i = 0; i < 26; ++i) {
-			cript[prov[i]] = char('a'+i);
+			cript.insert(make_pair(prov[i], char('a'+i)));
 		}
-		cript['_'] =  ' ';
+		cript.insert(make_pair('_', ' '));
 		int n;
 		cin >> n;
 		for (int i = 0; i < n; ++i) {
 			string input;
 			cin >> input;
-			for (char c : input) cout << cript[c];
+			for (auto c : input) cout << cript[c];
 			cout << endl;
 		}
 		cout << endl;

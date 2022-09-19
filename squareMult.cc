@@ -1,99 +1,88 @@
-#include <iostream>
-#include <vector>
-#include <unordered_set>
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<bool>primes;
+set <int> primes;
 int n;
-vector<int>b;
-vector<int>a;
-vector<vector<int>>v;
-vector<bool>used;
+vector <int> b;
+vector <int> a;
+vector <vector <int> >v;
+set <int> s;
 
-vector<bool>provPrime;
+bool isPrime(int x) {
+	if (x < 2) return false;
+	if (x == 2) return true;
+	if (x%2 == 0) return false;
+	for (int i = 3; i*i <= x; i+=2) if (x%i == 0) return false;
+}
+
 void getPrimes(int x) {
-	provPrime = vector<bool>(x, true);
-	for (int i = 2; i < x; ++i) {
-		if (provPrime[i]) {
-			if (i >= x/2) primes[i] = true;
-			for (int j = i*2; j < x; j += i) provPrime[j] = false;
-		}
+	for (int i = x/2 + 1; i < x; ++i) {
+		if (isPrime(i)) primes.insert(i);
 	}
 }
 
-int maxim = -10;
-int provMul = -1;
-int sols = 0;
-void sol(int x, int y, bool f) {
-	if (sols > maxim+10) {
-		maxim = sols;
-		cout << maxim << endl;
-	}
-	if (x == n && y == n) {
-		++sols;
-		return;
-	}
-	if (y == n) {provMul = a[x]; return sol(x+1, x, !f);}
+
+bool check(int x) {
+	return a[x] == b[x];
+}
+
+int lemao = -1;
+bool sol(int x, int y, bool f) {
+	if (x == n && y == n) return true;
+	if (y == n) {lemao = a[x]; return sol(x+1, x, !f);}
 	if (x == n) {
-		if (a[y] != b[y]) return;
+		if (!check(y)) return false;
 		return sol(y+1, y+1, !f);
 	}
 	if (x == y) {
 		v[x][y] = 1;
 		if (f) {
-			return sol(x, y+1, f);
+			if (sol(x, y+1, f)) return true;
 		}
 		else {
-			return sol(x+1, y, f);
+			if (sol(x+1, y, f)) return true;
 		}
 	}
-	if (f) {
-		for (int i = 1; i <= n*n; ++i) {
-			if (primes[i]) continue;
-			if (!used[i]) {
-				used[i] = true;
-				v[x][y] = i;
-				a[x] *= i;
-				b[y] *= i;
-				sol(x, y+1, f);
-				a[x] /= i;
-				b[y] /= i;
-				used[i] = false;
+	for (int i = 1; i <= n*n; ++i) {
+		if (primes.count(i)) continue;
+		if (!f) if (lemao%i != 0) continue;
+		if (!s.count(i)) {
+			if (!f) lemao /= i;
+			s.insert(i);
+			v[x][y] = i;
+			a[x] *= i;
+			b[y] *= i;
+			if (f) {
+				if (sol(x, y+1, f)) return true;
 			}
-		}
-	}
-	else {
-		for (int i = 1; i <= n*n; ++i) {
-			if (primes[i]) continue;
-			if (provMul%i != 0) continue;
-			if (!used[i]) {
-				provMul /= i;
-				used[i] = true;
-				v[x][y] = i;
-				a[x] *= i;
-				b[y] *= i;
-				sol(x+1, y, f);
-				a[x] /= i;
-				b[y] /= i;
-				used[i] = false;
-				provMul *= i;
+			else {
+				if (sol(x+1, y, f)) return true;
 			}
+			v[x][y] = -1;
+			a[x] /= i;
+			b[y] /= i;
+			s.erase(i);
+			if (!f) lemao *= i;
 		}
 	}
+	return false;
 }
 
 
 int main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
 	cin >> n;
+	getPrimes(n*n);
 	a = vector<int>(n, 1);
 	b = vector<int>(n, 1);
-	used = vector<bool>(n*n+1, 0);
-	primes = vector<bool>(n*n+1, 0);
-	getPrimes(n*n);
 	v = vector<vector<int>>(n, vector<int>(n, -1));
-	sol(0,0,true);
-	cout << sols << endl;
+	if (sol(0, 0, true)) {
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < n; ++j) {
+				cout << v[i][j] << ' ';
+			}
+			cout << endl;
+		}
+	}
+	else cout << "no sol" << endl;
+
 }

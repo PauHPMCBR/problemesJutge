@@ -1,47 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n;
-vector<vector<int>>v;
-vector<int>tin;
-vector<int>tout;
+vector<int>v;
+vector<unordered_set<int>>anc;
 
-int timeIn = 0;
-int timeOut = 0;
-void dfs(int x) {
-	tin[x] = timeIn;
-	++timeIn;
-	for (auto i : v[x]) {
-		dfs(i);
-	}
-	tout[x] = timeOut;
-	++timeOut;
-}
-
-bool isAncestor(int x, int y) {
-	return (tin[x] < tin[y] && tout[x] > tout[y]);
+void getAncestors(int pos) {
+	//cout << pos << ' ' << v[pos] << endl;
+	if (pos == 0) return;
+	if (!anc[pos].empty()) return;
+	getAncestors(v[pos]);
+	anc[pos] = anc[v[pos]];
+	anc[pos].insert(v[pos]);
 }
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cin >> n;
-	v = vector<vector<int>>(n);
-	tin = vector<int>(n);
-	tout = vector<int>(n);
-	int prov;
+	v = vector<int>(n);
+	anc = vector<unordered_set<int>>(n);
 	for (int i = 1; i < n; ++i) {
-		cin >> prov;
-		v[prov-1].push_back(i);
+		cin >> v[i];
+		--v[i];
 	}
-	dfs(0);
+	for (int i = 1; i < n; ++i) {
+		//cout << "debug1" << endl;
+		getAncestors(i);
+	}
 	int q;
 	cin >> q;
 	while (q--) {
 		int a,b;
 		cin >> a >> b;
 		--a; --b;
-		if (isAncestor(b,a)) cout << 2 << endl;
-		else if (isAncestor(a,b)) cout << 1 << endl;
+		if (anc[a].count(b)) cout << 2 << endl;
+		else if (anc[b].count(a)) cout << 1 << endl;
 		else cout << 3 << endl;
 	}
 }

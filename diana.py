@@ -11,3 +11,4 @@ dib.ellipse([2*n, 2*n, 6*n-1, 6*n-1], 'Red')
 dib.ellipse([3*n, 3*n, 5*n-1, 5*n-1], 'Green')
 
 img.save('output.png')
+img.show()

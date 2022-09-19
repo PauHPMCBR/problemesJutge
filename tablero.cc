@@ -1,28 +1,33 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
 
 int main(){
-	int n, m;
-	cin >> n >> m;
-	if (n%2 != 0 || m%2 != 0) cout << "NO" << endl;
-	else {
-		cout << "SI" << endl;
-		for (int i = 0; i < n; ++i) {
-			for (int j = 0; j < m; ++j) {
-				bool b = (j+1)%2;
-				if (i >= m-1) {
-					if (j == 0) b = false;
-					else if (j == 1) if (i != n-1) b = true;
+	ll t, n, m;
+	cin >> t;
+	while (t--) {
+		cin >> n >> m;
+		if ((n*m)%2 != 0) cout << "NO" << endl;
+		else {
+			if (n%2 == 0) {
+				for (int i = 0; i < n; ++i){
+					for (int j = 0; j < m; ++j) {
+						if (i < n/2) cout << '#';
+						else cout << '.';
+					}
+					cout << endl;
 				}
-				else if (j >= n-1) {
-					if (i == 0) b = false;
-					else if (i == 1) if (j != m-1) b = true;
-				}
-				if (b) cout << '#';
-				else cout << '.';
 			}
-			cout << endl;
+			else {
+				for (int i = 0; i < n; ++i){
+					for (int j = 0; j < m; ++j) {
+						if (j < m/2) cout << '#';
+						else cout << '.';
+					}
+					cout << endl;
+				}
+			}
 		}
 	}
 }
