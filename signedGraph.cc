@@ -7,7 +7,6 @@ vector<pair<int,bool>>parent;
 bool lel = true;
  
 void dfs(int x) {
-	cout << x << endl;
 	visited[x] = 1;
 	for (auto i : v[x]) {
 		if (!visited[i.first]) {
@@ -16,12 +15,15 @@ void dfs(int x) {
 		}
 		else if (visited[i.first] == 1 && parent[x].first != i.first) {
 			int current = x;
-			bool positive = parent[i.first].second;
+			bool positive = i.second;
 			while (current != i.first) {
 				cout << ' ' << x << ' ' << current << ' ' << i.first << endl;
+				//	for (int i = 0; i < 1e7; ++i);
 				if (parent[current].second) positive = !positive;
+				visited[current] = 2;
 				current = parent[current].first;
 			}
+
 			if (!positive) {
 				lel = false;
 				return;
@@ -30,11 +32,10 @@ void dfs(int x) {
 	}
 	visited[x] = 2;
 }
- 
+
 int main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
+	//ios_base::sync_with_stdio(0);
+	//cin.tie(0);
 	while (cin >> n >> m) {
 		v = vector<vector<pair<int,bool>>>(n);
 		parent = vector<pair<int,bool>>(n, {0,0});

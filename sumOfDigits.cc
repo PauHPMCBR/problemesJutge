@@ -1,7 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-int main(){
+int main() {
 	int n;
 	while (cin >> n) {
 		int m = n;
