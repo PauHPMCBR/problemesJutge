@@ -9,5 +9,5 @@ int main() {
 		if (c == 'a') ++res;
 		cin >> c;
 	}
-	cout << res << endl;
+	cout << (res > 0 ? "yes" : "no") << endl;
 }
