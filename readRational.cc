@@ -12,6 +12,3 @@ bool read_rational(int& num, int& den) {
 }
 return false;
 }
-
-int main() {
-}

@@ -1,6 +1,4 @@
-n = int(input())
-v = []
-for i in range(n):
-	v.append(int(input()))
-x = int(input())
-print(v*x)
+a = 2
+b = 3
+c = 4
+print(eval("((a+b)*c)"))
