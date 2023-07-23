@@ -6,7 +6,7 @@ typedef long long ll;
 #define y second
 #define pb push_back
 vector<point>v;
-
+vector<point> up, down;
 
 bool isClock(point a, point b, point c) {
 	return a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y) < 0;
@@ -16,19 +16,8 @@ bool isCounter(point a, point b, point c) {
 	return a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y) > 0;
 }
 
-int main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
-	ll n;
-	cin >> n;
-	v = vector<point>(n);
-	for (int i = 0; i < n; ++i) {
-		cin >> v[i].x >> v[i].y;
-	}
-	sort(v.begin(), v.end());
-	point p1 = v[0], p2 = v[n-1];
-	vector<point> up, down;
+//p1 and p2 are start and end points
+void convexHull(point p1, point p2) {
 	up.pb(p1);
 	down.pb(p1);
 
@@ -42,8 +31,7 @@ int main(){
 			down.pb(v[i]);
 		}
 	}
-	cout << up.size()+down.size()-2 << endl;
-	for (int i = 0; i < down.size(); ++i) cout << down[i].x << ' ' << down[i].y << endl;
-	for (int i = up.size()-2; i > 0; --i) cout << up[i].x << ' ' << up[i].y << endl;
-	
+	//cout << up.size()+down.size()-2 << endl;
+	//for (int i = 0; i < down.size(); ++i) cout << down[i].x << ' ' << down[i].y << endl;
+	//for (int i = up.size()-2; i > 0; --i) cout << up[i].x << ' ' << up[i].y << endl;
 }
